@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Energy.Controls.AddEnergySourceDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:local="clr-namespace:Energy.Controls"
+             xmlns:vm="clr-namespace:Energy.ViewModels"
+             xmlns:util="clr-namespace:Energy.Utils"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:AddEnergySourceContext/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <util:NullToBoolConverter x:Key="NullToBoolConverter"/>
+    </UserControl.Resources>
+    <Border Width="800" Height="450" CornerRadius="10" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Margin="0, 10" FontSize="16" FontWeight="SemiBold" TextAlignment="Center" Text="Choose preset"/>
+            <DataGrid Grid.Row="1" SelectionMode="Single" HeadersVisibility="All" AutoGenerateColumns="False" ItemsSource="{Binding Presets}" SelectedItem="{Binding SelectedPreset}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" CanUserResize="False" Binding="{Binding Name, Mode=OneTime}" Header="Name"/>
+                    <DataGridTemplateColumn Width="60" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}" Width="32" Height="32" Stretch="Uniform"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn IsReadOnly="True" CanUserResize="False" Binding="{Binding Path, Mode=OneTime}" Header="Path"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBox Grid.Row="2" Style="{StaticResource TextBoxExtend}" Margin="15, 7" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="Source name:" Text="{Binding SelectedPreset.Name }"/>
+            <StackPanel Grid.Row="3" FlowDirection="RightToLeft" Orientation="Horizontal">
+                <Button Content="OK" Command="ApplicationCommands.Close" Width="100" Margin="7" Style="{StaticResource ButtonPrimary}" Click="OnOkClick" IsEnabled="{Binding SelectedPreset, Converter={StaticResource NullToBoolConverter}}"/>
+                <Button Content="Cancel" Command="ApplicationCommands.Close" Width="100" Margin="7"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
