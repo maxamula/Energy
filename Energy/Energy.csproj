@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="HandyControls" Version="3.5.0" />
     <PackageReference Include="Lighty" Version="0.3.2" />
-    <PackageReference Include="OxyPlot.Wpf" Version="2.1.2" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
   </ItemGroup>
 
 </Project>

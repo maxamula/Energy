@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Energy.Controls;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -95,5 +97,7 @@ namespace Energy.Models
                 OnPropertyChanged(nameof(Image));
             }
         }
+
+        public LineSeries Chart { get; set; }
     }
 }

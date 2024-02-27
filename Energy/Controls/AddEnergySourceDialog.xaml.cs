@@ -22,13 +22,12 @@ namespace Energy.Controls
     /// </summary>
     public partial class AddEnergySourceDialog : UserControl
     {
-        public AddEnergySourceDialog(IList<EnergySource> sources)
+        public AddEnergySourceDialog()
         {
             InitializeComponent();
-            _sources = sources;
         }
 
-        private IList<EnergySource> _sources;
-        private void OnOkClick(object sender, RoutedEventArgs e) => _sources.Add((this.DataContext as AddEnergySourceContext).SelectedPreset);
+        public EnergySource Preset { get; private set; }
+        private void OnOkClick(object sender, RoutedEventArgs e) => Preset = (this.DataContext as AddEnergySourceContext).SelectedPreset;
     }
 }
